@@ -44,8 +44,8 @@ const LoginPage = () => {
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
         {
-          email: signUpId,
-          password: signUpPassWord,
+          email: signUpId, //연습용 아이디 : gkgkgkgkkgkg@naver.com
+          password: signUpPassWord, //연습용 비밀번호 :123123
           returnSecureToken: true,
         }
       )

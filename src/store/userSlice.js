@@ -16,8 +16,8 @@ let user = createSlice({
     logoutuser(state) {
       state.token = null;
       state.email = null;
-      localStorage.setItem("token", null);
-      localStorage.setItem("email", null);
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
     },
   },
 });

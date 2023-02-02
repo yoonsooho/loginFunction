@@ -23,7 +23,7 @@ function App() {
     })
   );
 
-  // console.log(location);
+  console.log(location);
   return (
     <div className="App">
       <div
