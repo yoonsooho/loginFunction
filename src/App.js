@@ -51,7 +51,13 @@ function App() {
             로그인하러가기
           </button>
         ) : (
-          <button onClick={() => dispatch(logoutuser())}>로그아웃하기</button>
+          <div>
+            <button onClick={() => navigate("/mypage")}>Mypage이동하기</button>
+            <button onClick={() => navigate("/login")}>
+              로그인창 이동하기
+            </button>
+            <button onClick={() => dispatch(logoutuser())}>로그아웃하기</button>
+          </div>
         )}
       </div>
       <Routes>
