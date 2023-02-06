@@ -6,16 +6,22 @@ import Mypage from "./Mypage";
 import { loginUser, logoutuser } from "./store/userSlice";
 
 const LoginPage = () => {
+  let dispatch = useDispatch();
+
   let API_KEY = "AIzaSyAxURV7vxqnqWyii5jsD4tEwMX2ulwX0lQ";
+  let URL =
+    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
+
   let navigate = useNavigate();
   let store = useSelector((state) => state);
-  let dispatch = useDispatch();
   let [loginId, setLoginId] = useState("");
   let [loginPassWord, setLoginPassWord] = useState("");
   let [signUpId, setSignUpId] = useState("");
   let [signUpPassWord, setSignUpPassWord] = useState("");
 
   console.log(store);
+  let now = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
+  console.log(now.format(new Date()));
 
   let LoginSubmitHandler = (e) => {
     e.preventDefault();
@@ -23,15 +29,16 @@ const LoginPage = () => {
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
         {
-          email: loginId,
-          password: loginPassWord,
+          email: loginId, //연습용 아이디 : gkgkgkgkkgkg@naver.com
+          password: loginPassWord, //연습용 비밀번호 :123123
           returnSecureToken: true,
         }
       )
       .then((a) => {
-        console.log(a);
+        console.log(a.data);
         dispatch(loginUser(a.data));
         navigate("/mypage");
+        console.log(a.expiresIn);
       })
       .catch((a) => {
         console.log(a.code);
@@ -44,12 +51,12 @@ const LoginPage = () => {
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
         {
-          email: signUpId, //연습용 아이디 : gkgkgkgkkgkg@naver.com
-          password: signUpPassWord, //연습용 비밀번호 :123123
+          email: signUpId,
+          password: signUpPassWord,
           returnSecureToken: true,
         }
       )
-      .then((e) => console.log(e))
+      .then((e) => console.log(`${e.data.email} 님 반갑습니다.`))
       .catch((e) => console.log(e));
   };
 
@@ -81,6 +88,7 @@ const LoginPage = () => {
                   setLoginId(e.target.value);
                 }}
               ></input>
+              <div>연습용 아이디 : gkgkgkgkkgkg@naver.com</div>
             </div>
             <div>
               <span
@@ -98,6 +106,7 @@ const LoginPage = () => {
                   setLoginPassWord(e.target.value);
                 }}
               ></input>
+              <div>연습용 비밀번호 : 123123</div>
             </div>
             <button>로그인</button>
           </div>

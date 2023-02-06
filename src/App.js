@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Emmet from "./Emmet";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -23,7 +22,7 @@ function App() {
     })
   );
 
-  console.log(location);
+  // console.log(location);
   return (
     <div className="App">
       <div
